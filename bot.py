@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pymongo import MongoClient
 
 # Replace with your actual Telegram bot token
@@ -61,8 +62,8 @@ def start_message(message):
 
     message_text = welcome_text + bot_description + additional_info
 
-    keyboard = types.InlineKeyboardMarkup()
-    developer_button = types.InlineKeyboardMarkup(text=" DEVELOPER ", url="https://t.me/JustMe_Charz")
+    keyboard = InlineKeyboardMarkup()
+    developer_button = InlineKeyboardMarkup(text="DEVELOPER", url="https://t.me/JustMe_Charz")
     keyboard.add(developer_button)
 
     bot.send_message(message.chat.id, message_text, reply_markup=keyboard)
