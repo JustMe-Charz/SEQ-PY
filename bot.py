@@ -40,9 +40,12 @@ def update_user_info(user_id, username, name):
 
 # Function to retrieve user data from MongoDB
 def get_user(user_id):
-    user = users_collection.find_one({"user_id": user_id})
-    return user
-
+    user_data = users_collection.find_one({"user_id": user_id})
+    if user_data:
+        return User(**user_data)  # Unpack dictionary into User object
+    else:
+        return None
+        
 # Function to handle /start command
 @bot.message_handler(commands=["start"])
 def start_message(message):
@@ -68,16 +71,14 @@ def start_message(message):
 # Function to handle file processing
 def process_file_sequence(message, file_type):
     user_id = message.from_user.id
-
     user = get_user(user_id)
     if user is None:
         bot.reply_to(message, "You haven't started a sequencing process yet. Use /ssequence first.")
         return
 
     file = getattr(message, file_type)
-
     if file:
-        user.files.append(message) # Assuming 'files' is a list within the User object
+        user.files.append(message)
         users_collection.update_one({"user_id": user_id}, {"$set": {"files": user.files}})
     else:
         bot.reply_to(message, "Unsupported file type. Send documents or videos.")
