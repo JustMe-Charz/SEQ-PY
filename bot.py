@@ -74,7 +74,7 @@ def start_message(message):
 @bot.message_handler(content_types=['document', 'video'])
 def handle_file(message):
     file_type = 'document' if message.document else 'video'
-    process_file_sequence(message, file_type)
+    process_file_sequence(message, file_type, message_data)
 
     # Extract relevant data
     user_id = message.from_user.id
