@@ -121,7 +121,9 @@ def show_stats(message):
 @bot.message_handler(content_types=['document', 'video'])
 def handle_file(message):
     file_type = 'document' if message.document else 'video'
+    received_files = []
     process_file_sequence(message, file_type)
-
+    received_files.append(message)
+    
 # Start the bot
 bot.infinity_polling()
