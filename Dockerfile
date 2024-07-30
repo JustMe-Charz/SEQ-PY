@@ -1,13 +1,20 @@
-FROM node:14
+# Use an official Python image as a base
+FROM python:3.12-slim-buster
 
-# Copy package.json
-COPY package*.json ./
+# Set the working directory
+WORKDIR /app
 
-RUN npm install
+# Copy requirements.txt to the working directory
+COPY requirements.txt ./
 
+# Install dependencies
+RUN pip install -r requirements.txt
+
+# Copy the rest of the application code
 COPY . .
 
+# Expose the port for the bot
 EXPOSE 8080
 
-# start command
-CMD ["npm", "start"]
+# Command to run when the container starts
+CMD ["python", "bot.py"]
