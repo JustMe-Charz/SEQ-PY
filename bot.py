@@ -62,11 +62,8 @@ def start_message(message):
 
     message_text = welcome_text + bot_description + additional_info
 
-    keyboard = InlineKeyboardMarkup()
-    developer_button = InlineKeyboardMarkup(text="DEVELOPER", url="https://t.me/JustMe_Charz")
-    keyboard.add(developer_button)
 
-    bot.send_message(message.chat.id, message_text, reply_markup=keyboard)
+    bot.send_message(message.chat.id, message_text)
 
 # Function to handle file processing
 def process_file_sequence(message, file_type):
