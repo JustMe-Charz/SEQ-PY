@@ -70,21 +70,6 @@ def start_message(message):
 
     bot.send_message(message.chat.id, message_text)
 
-    # Extract relevant data
-    user_id = message.from_user.id
-    chat_id = message.chat.id
-    message_text = message.text
-    
-    # Create a dictionary with relevant data
-    message_data = {
-        "user_id": user_id,
-        "chat_id": chat_id,
-        "message_text": message_text
-    }
-
-    # Call process_file_sequence with message_data
-    process_file_sequence(message, file_type, message_data)
-
 # Function to handle file processing
 def process_file_sequence(message, file_type, message_data):
     user_id = message.from_user.id
@@ -138,6 +123,18 @@ def show_stats(message):
 @bot.message_handler(content_types=['document', 'video'])
 def handle_file(message):
     file_type = 'document' if message.document else 'video'
+     # Extract relevant data
+    user_id = message.from_user.id
+    chat_id = message.chat.id
+    message_text = message.text
+    
+    # Create a dictionary with relevant data
+    message_data = {
+        "user_id": user_id,
+        "chat_id": chat_id,
+        "message_text": message_text
+    }
+
     process_file_sequence(message, file_type, message_data)
     
 # Start the bot
