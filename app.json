@@ -15,7 +15,7 @@
     },
     "mongo_uri": {
       "description": "Your MongoDB URL",
-      "value": "mongodb+srv://Test-Rename:swZjHfmQnmbbJDLX@cluster0.l67ew2y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+      "value": "mongodb+srv://test-sequence:Tt5jdW2hrEHKVo6V@cluster0.l67ew2y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     }
   },
   "buildpacks": [
