@@ -6,7 +6,7 @@ from pymongo import MongoClient
 bot_token = "7244688269:AAFqn6chSa0_71vk5wNrHqQYauTi97VlHWA"
 
 # MongoDB connection details (replace with yours)
-mongo_uri = "mongodb+srv://Test-Rename:swZjHfmQnmbbJDLX@cluster0.l67ew2y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+mongo_uri = "mongodb+srv://test-sequence:Tt5jdW2hrEHKVo6V@cluster0.l67ew2y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 # Adjust if using a remote  connection
 mongo_db_name = "seq"
 mongo_collection_name = "users"
