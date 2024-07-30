@@ -81,7 +81,7 @@ def process_file_sequence(message, file_type, message_data):
     file = getattr(message, file_type)
     if file:
         user.files.append(message)
-        users_collection.update_one({"user_id": user_id}, {"$set": {"files": user.files, "messages": message_data}})
+        users_collection.update_one({"user_id": message_data["user_id"]}, {"$set": {"messages": message_data}})
     else:
         bot.reply_to(message, "Unsupported file type. Send documents or videos.")
 
@@ -123,11 +123,12 @@ def show_stats(message):
 @bot.message_handler(content_types=['document', 'video'])
 def handle_file(message):
     file_type = 'document' if message.document else 'video'
-     # Extract relevant data
+    
+    # Extract relevant data
     user_id = message.from_user.id
     chat_id = message.chat.id
     message_text = message.text
-    
+
     # Create a dictionary with relevant data
     message_data = {
         "user_id": user_id,
@@ -135,6 +136,7 @@ def handle_file(message):
         "message_text": message_text
     }
 
+    # Call process_file_sequence with message_data
     process_file_sequence(message, file_type, message_data)
     
 # Start the bot
