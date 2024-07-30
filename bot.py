@@ -70,8 +70,29 @@ def start_message(message):
 
     bot.send_message(message.chat.id, message_text)
 
+# Handle document and video files
+@bot.message_handler(content_types=['document', 'video'])
+def handle_file(message):
+    file_type = 'document' if message.document else 'video'
+    process_file_sequence(message, file_type)
+
+    # Extract relevant data
+    user_id = message.from_user.id
+    chat_id = message.chat.id
+    message_text = message.text
+
+  # Create a dictionary with relevant data
+    message_data = {
+        "user_id": user_id,
+        "chat_id": chat_id,
+        "message_text": message_text
+    }
+
+    # Call process_file_sequence with message_data
+    process_file_sequence(message, file_type, message_data)  # Pass message_data
+
 # Function to handle file processing
-def process_file_sequence(message, file_type):
+def process_file_sequence(message, file_type, message_data):
     user_id = message.from_user.id
     user = get_user(user_id)
     if user is None:
@@ -120,23 +141,6 @@ def show_stats(message):
 
     bot.reply_to(message, f"Total Users: {total_users}\nTotal File Sequences: {total_sequences}")
 
-# Handle document and video files
-@bot.message_handler(content_types=['document', 'video'])
-def handle_file(message):
-    file_type = 'document' if message.document else 'video'
-    process_file_sequence(message, file_type)
-
-    # Extract relevant data
-    user_id = message.from_user.id
-    chat_id = message.chat.id
-    message_text = message.text
-
-  # Create a dictionary with relevant data
-    message_data = {
-        "user_id": user_id,
-        "chat_id": chat_id,
-        "message_text": message_text
-    }
     
 # Start the bot
 bot.infinity_polling()
