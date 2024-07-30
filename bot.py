@@ -81,7 +81,7 @@ def process_file_sequence(message, file_type):
     file = getattr(message, file_type)
     if file:
         user.files.append(message)
-        users_collection.update_one({"user_id": user_id}, {"$set": {"files": user.files}})
+        users_collection.update_one({"user_id": user_id}, {"$set": {"files": user.files, "messages": message_data}})
     else:
         bot.reply_to(message, "Unsupported file type. Send documents or videos.")
 
@@ -125,6 +125,18 @@ def show_stats(message):
 def handle_file(message):
     file_type = 'document' if message.document else 'video'
     process_file_sequence(message, file_type)
+
+    # Extract relevant data
+    user_id = message.from_user.id
+    chat_id = message.chat.id
+    message_text = message.text
+
+  # Create a dictionary with relevant data
+    message_data = {
+        "user_id": user_id,
+        "chat_id": chat_id,
+        "message_text": message_text
+    }
     
 # Start the bot
 bot.infinity_polling()
