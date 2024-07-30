@@ -1,0 +1,32 @@
+{
+  "name": "SEQ-PY",
+  "description": "A bot to send files in a sequence.",
+  "keywords": [
+    "telegram",
+    "files",
+    "sequencing"
+  ],
+  "repository": "https://github.com/JustMe-Charz/SEQ-PY",
+  "logo": "https://ibb.co/FgPVtzw",
+  "env": {
+    "bot_token": {
+      "description": "Your Bot Token",
+      "value": "7244688269:AAFqn6chSa0_71vk5wNrHqQYauTi97VlHWA"
+    },
+    "mongo_uri": {
+      "description": "Your MongoDB URL",
+      "value": "mongodb+srv://Test-Rename:swZjHfmQnmbbJDLX@cluster0.l67ew2y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  }
+}
