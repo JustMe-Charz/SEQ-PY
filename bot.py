@@ -101,8 +101,7 @@ def end_sequence(message):
         caption = file_message.caption or ''
 
         if file_message.document:
-
-bot.send_document(message.chat.id, file.file-id, caption=caption)
+            bot.send_document(message.chat.id, file.file-id, caption=caption)
         elif file_message.video:
             bot.send_video(message.chat.id, file.file_id, caption=caption)
 
