@@ -3,10 +3,10 @@ from telebot import types
 from pymongo import MongoClient
 
 # Replace with your actual Telegram bot token
-bot_token = "YOUR_BOT_TOKEN"
+bot_token = "7244688269:AAFqn6chSa0_71vk5wNrHqQYauTi97VlHWA"
 
 # MongoDB connection details (replace with yours)
-mongo_uri = "mongodb://localhost:27017/"
+mongo_uri = "mongodb+srv://Test-Rename:swZjHfmQnmbbJDLX@cluster0.l67ew2y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 # Adjust if using a remote  connection
 mongo_db_name = "seq"
 mongo_collection_name = "users"
