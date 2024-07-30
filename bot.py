@@ -70,18 +70,12 @@ def start_message(message):
 
     bot.send_message(message.chat.id, message_text)
 
-# Handle document and video files
-@bot.message_handler(content_types=['document', 'video'])
-def handle_file(message):
-    file_type = 'document' if message.document else 'video'
-    process_file_sequence(message, file_type, message_data)
-
     # Extract relevant data
     user_id = message.from_user.id
     chat_id = message.chat.id
     message_text = message.text
-
-  # Create a dictionary with relevant data
+    
+    # Create a dictionary with relevant data
     message_data = {
         "user_id": user_id,
         "chat_id": chat_id,
@@ -89,7 +83,7 @@ def handle_file(message):
     }
 
     # Call process_file_sequence with message_data
-    process_file_sequence(message, file_type, message_data)  # Pass message_data
+    process_file_sequence(message, file_type, message_data)
 
 # Function to handle file processing
 def process_file_sequence(message, file_type, message_data):
@@ -141,6 +135,10 @@ def show_stats(message):
 
     bot.reply_to(message, f"Total Users: {total_users}\nTotal File Sequences: {total_sequences}")
 
+@bot.message_handler(content_types=['document', 'video'])
+def handle_file(message):
+    file_type = 'document' if message.document else 'video'
+    process_file_sequence(message, file_type, message_data)
     
 # Start the bot
 bot.infinity_polling()
