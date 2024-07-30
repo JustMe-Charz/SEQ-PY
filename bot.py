@@ -40,11 +40,13 @@ def update_user_info(user_id, username, name):
 
 # Function to retrieve user data from MongoDB
 def get_user(user_id):
-    user_data = users_collection.find_one({"user_id": user_id})
-    if user_data:
-        return User(**user_data)  # Unpack dictionary into User object
-    else:
-        return None
+  user_data = users_collection.find_one({"user_id": user_id})
+  if user_data:
+    # Extract relevant user data (excluding _id) from the dictionary
+    user_without_id = {key: value for key, value in user_data.items() if key != '_id'}
+    return User(user_without_id['user_id'], user_without_id['username'], user_without_id['name'], user_without_id.get('total_sequences', 0), user_without_id.get('files', []))
+  else:
+    return None
         
 # Function to handle /start command
 @bot.message_handler(commands=["start"])
